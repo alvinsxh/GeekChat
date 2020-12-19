@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatic,org//DTD Mapper 3.0//EN" "http://mybatic.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.alvin.geekchat.server.dal.dao.UserRelationDAO">
+    <resultMap id="UserRelationResult" type="com.alvin.geekchat.server.dal.dataobejct.UserRelationDO">
+        <id column="id" property="id"/>
+        <result column="relation_user1" property="relationUser1"/>
+        <result column="relation_user2" property="relationUser2"/>
+    </resultMap>
+
+    <sql id="columns">
+        id, relation_user1, relation_user2
+    </sql>
+
+    <select id="query" resultMap="UserRelationResult">
+        SELECT
+        <include refid="columns"/>
+        FROM user_relation
+        WHERE relation_user1 = #{userId}
+        OR relation_user2 = #{userId}
+    </select>
+</mapper>

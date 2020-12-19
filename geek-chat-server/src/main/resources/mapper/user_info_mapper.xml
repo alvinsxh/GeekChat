@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatic,org//DTD Mapper 3.0//EN" "http://mybatic.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.alvin.geekchat.server.dal.dao.UserInfoDAO">
+    <resultMap id="UserInfoResult" type="com.alvin.geekchat.server.dal.dataobejct.UserInfoDO">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="user_name" property="userName"/>
+    </resultMap>
+
+    <sql id="columns">
+        id, user_id, user_name
+    </sql>
+
+    <select id="get" resultMap="UserInfoResult">
+        SELECT
+        <include refid="columns"/>
+        FROM user_info
+        WHERE user_id = #{userId}
+        AND user_password = #{userPassword}
+    </select>
+
+    <select id="query" resultMap="UserInfoResult">
+        SELECT
+        <include refid="columns"/>
+        FROM user_info
+        WHERE user_id in
+        <foreach collection="userIds" open="(" close=")" separator="," item="item">
+            #{item}
+        </foreach>
+    </select>
+</mapper>

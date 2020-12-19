@@ -1,1 +1,1 @@
-# GeekChat
+# geek-chat
